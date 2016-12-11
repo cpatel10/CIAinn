@@ -2,68 +2,103 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../CIAinn/main.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script type="text/javascript" src="../CIAinn/main.js"></script>
-    <title>joinUS</title>
+    <title>Join Us</title>
 </head>
+
 <body>
-
-<header style="border-bottom:black 1px solid">
-    <h1><a href="index.php">CIAinn</a></h1>
-    </header>
-	<?php
-      if (isset($_GET['userNotFound']) && $_GET['userNotFound']) {
-        echo "<p>Login information is invalid!</p>";
-      }
-      elseif(isset($_GET['userNameExists']) && $_GET['userNameExists']) {
-         echo "<p>Username already exists!! Please use another username or login</p>";
-      }
-	  elseif(isset($_GET['passwordIncorrect']) && $_GET['passwordIncorrect']) {
-         echo "<p>The password is incorrect. Please try again!</p>";
-      }
-	  
-    ?> 
-
-    <section id="joinus">
-	
-
-        <div id="login">
-        <h3>Login</h3>
-            <form action="customer.php" method="post" >
-                <label for="email1">Email : </label>
-                <input class="logInTextField" type="text" id="email1" name="email1" required /><br><br>
-                <label for="pwd">Password : </label>
-                <input class="logInTextField" type="password" id="pwd" name="pwd" required/><br><br><br>
-                <div id="submit"><input type="submit" value="Login" style="float:left; width: 30%"></div>
-
-            </form>
-
-            </div>
-
-        <div id="signup">
-            <h3>Register</h3>
-            <form action="newCustomer.php" method="post">
-
-                <label for="fName">First Name : </label>
-                <input class="textField" type="text" id="fname" name="fname" required/><br><br>
-                <label for="lName">Last Name : </label>
-                <input class="textField" type="text" id="lName" name="lname" required/><br><br>
-                <label for="phone">Phone : </label>
-                <input class="textField" type="text" id="phone" name="phone" required/><br><br>
-                <label for="email">Email : </label>
-                <input class="textField" type="text" id="email" name="email" required/><br><br>
-                <label for="pswd">Password : </label>
-                <input class="textField" type="password" id="pswd" name="pswd" required/></br><br><br>
-                <div id="submit1"><input type="submit" value="Sign up" style="float:left; width: 30%"></div>
-                 </form>
+    <div class="container">
+        <div class="page-header row">
+            <a class="logo" href="index.php">CIAinn</a>
         </div>
-        </section>
 
-<div id="footer" style="text-align: center">
-    <p>©2016 CIA Inn, Inc. All rights reserved.</p>
-</div>
+        <?php
+        if (isset($_GET['userNotFound']) && $_GET['userNotFound']) {
+            echo "<p>Login information is invalid!</p>";
+        }
+        elseif(isset($_GET['userNameExists']) && $_GET['userNameExists']) {
+            echo "<p>Username already exists!! Please use another username or login</p>";
+        }
+        elseif(isset($_GET['passwordIncorrect']) && $_GET['passwordIncorrect']) {
+            echo "<p>The password is incorrect. Please try again!</p>";
+        }
+        ?>
 
+        <div class="row top-space">
+            <div class="col-lg-6">
+                <h3 class="form-header">Login</h3>
+                <form class="form-horizontal" action="customer.php" method="post" >
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="email1">Email</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="email" name="email1" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="pwd">Password</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="password" name="pwd" required/>
+                        </div>
+                    </div>
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input class="btn btn-default" type="submit" value="Login">
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <h3 class="form-header">Register</h3>
+                <form class="form-horizontal" action="newCustomer.php" method="post">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="fName">First Name</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" name="fname" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="lName">Last Name</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" name="lname" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="phone">Phone</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" name="phone" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="email">Email</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="email" name="email" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="pswd">Password</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="password"name="pswd" required />
+                        </div>
+                    </div>
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input class="btn btn-default" type="submit" value="Sign up" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row top-space center-align">
+            <footer>
+                <a href="">About US</a><label>|</label>
+                <a href="contact.html">Contact Us</a><label>|</label>
+                <a href="">Subscribe</a><label>|</label>
+                <a href="">Reviews</a><label>|</label>
+                <a href="">Terms & Policies</a><label>|</label>
+                <a href="">Careers</a></br>
+                <copyright>©2016 CIA Inn, Inc. All rights reserved.</copyright>
+            </footer>
+        </div>
+    </div>
 </body>
-
 </html>
