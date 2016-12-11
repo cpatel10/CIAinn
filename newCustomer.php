@@ -1,5 +1,5 @@
 <?php
-	include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/db.inc.php';
+	include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/db.inc.php';
 
 	$fname=$_POST['fname'];
 	$lname=$_POST['lname'];
@@ -45,8 +45,15 @@ try {
     		include 'error.html.php';
     		exit();
   	}
+
+  	session_start();
 	
-	header('Location: customerProfile.php');
+	if (isset($_SESSION['roomno'])) {
+		header('Location: reservation.php');
+		exit();		
+	} else {
+		header('Location: customerProfile.php');
+	}
 
 ?>
 

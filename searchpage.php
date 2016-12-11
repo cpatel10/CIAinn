@@ -22,7 +22,7 @@
 
 try
 {
-	$sql='SELECT roomno, bedsize, smokingallowed, noofbeds, noofguests,noofbathroom 
+	$sql='SELECT roomno, bedsize, smokingallowed, noofbeds, noofguests,noofbathroom, price 
     from room 
     where roomno NOT IN (
       select roomno 
@@ -37,8 +37,8 @@ try
     AND bedsize="'.$bedsize.'"
 	AND isAvailable=1
 	ORDER BY
-    RAND()
-LIMIT 0, 1';
+    RAND()';
+//LIMIT 0, 1';
     $result = $pdo->query($sql);
 
  //  $sql='SELECT roomno, bedsize, smokingallowed, noofbeds, noofguests,noofbathroom 
@@ -76,7 +76,7 @@ catch(PDOException $e)
 ?>
 <header>
 
-    <h1><a href="index.html">CIAinn</a></h1>
+    <h1><a href="index.php">CIAinn</a></h1>
 	
 </header>
 <hr/>
@@ -84,10 +84,36 @@ catch(PDOException $e)
 <section>
 
 <h3>Search Results</h3>
+
+<hr/>
    
-    <table >
+<!--     <table > -->
     <?php foreach ($result as $search): ?>
-      <tr>
+      <div class="searched-room">
+        <p><strong>Bedsize: </strong><?php echo $search['bedsize']; ?></p>
+        <p><strong>Number of beds: </strong><?php echo $search['noofbeds']; ?></p>
+        <p><strong>Maximum number of guests: </strong><?php echo $search['noofguests']; ?></p>
+        <p><strong>Number of bathrooms: </strong><?php echo $search['noofbathroom']; ?></p>
+        <p>
+        <?php 
+          if ($search['smokingallowed'] == 1) {
+            echo "Smoking allowed";
+          } else {
+            echo "Non-smoking room";
+          }
+        ?>
+        </p>
+        <p><strong>Price: $<?php echo $search['price']; ?></strong></p>
+        <form action="reservation.php" method="post">
+          <input type="hidden" name="roomno" value="<?php echo $search['roomno']; ?>">
+          <input type="hidden" name="price" value="<?php echo $search['price']; ?>">
+          <input type="hidden" name="startdate" value="<?php echo $startdate; ?>">
+          <input type="hidden" name="enddate" value="<?php echo $enddate; ?>">
+          <input type="hidden" name="guests" value="<?php echo $noofguests; ?>">
+         <input type="submit" value="reserve">
+        </form>
+      </div>
+<!--       <tr>
       <td> <?php echo $search['roomno']; ?> </td>
        <td style= "width:150px"> <?php echo $search['bedsize']; ?> </td>
 	   <td> <?php echo $search['noofbeds']; ?> </td>
@@ -100,9 +126,9 @@ catch(PDOException $e)
          <input type="submit" value="reserve">
         </form>
       </td>
-       </tr>
+       </tr> -->
     <?php endforeach; ?>
-    </table>
+<!--     </table> -->
    
 </section>
 </body>

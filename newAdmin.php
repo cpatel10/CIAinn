@@ -1,5 +1,5 @@
 <?php
-	include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/db.inc.php';
+	include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/db.inc.php';
 
 	$fname=$_POST['fname'];
 	$lname=$_POST['lname'];
