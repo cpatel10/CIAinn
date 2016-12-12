@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../CIAinn/main.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
     <title>profile</title>
 </head>
   </head>
@@ -13,7 +14,7 @@
 
     <h1><a href="index.php">CIAinn</a></h1>
   </header>
-
+  
   <div id="funtions">
 	<a class="show" target="1">Personal Details</a> |
 	<a class="show" target="2">Address</a> |
@@ -53,13 +54,18 @@
 	   <p><strong>City : </strong> <?php echo $add['city']; ?> </p>
 	   <p><strong>State : </strong> <?php echo $add['state']; ?> </p>
         <p><strong>Zipcode : </strong> <?php echo $add['zipcode']; ?> </p>
+        <p><form action="?deleteAdd" method="post">
+            <input type="hidden" name="addressID" value="<?php echo $add['addressID']; ?>">
+            <input type="submit" value="Delete">
+        </form></p>
         <hr/>
 
        </div>
     <?php endforeach; ?>
 
 
-    <h3> Add Address</h3>
+
+    <h3> Add New Address</h3>
   <form id="addressDetails" action="?" method="post">
     <label for="addressline1">Address Line 1 : </label>
       <input id="addressline1" type="text" name="addressline1" required><br><br>
@@ -112,14 +118,21 @@
       <?php foreach ($res as $reservation): ?>
 
           <div class="personal-info">
-              <p><strong>Reservation ID: </strong><?php echo $reservation['reservationID']; ?> </p>
-              <p><strong>Room No: </strong><?php echo $reservation['roomno'];?></p>
-              <p><strong>Start Date: </strong><?php echo $reservation['startdate']; ?> </p>
-              <p><strong>End Date: </strong><?php echo $reservation['enddate']; ?> </p>
+              <p><strong>Reservation ID: </strong><?php echo $reservation['reservationID']; ?> <br>
+              <p><strong>Room No: </strong><?php echo $reservation['roomno'];?><br>
+              <p><strong>Start Date: </strong><?php echo $reservation['startdate']; ?> <br>
+              <p><strong>End Date: </strong><?php echo $reservation['enddate']; ?> <br>
               <p><strong>No of Guests: </strong><?php echo $reservation['noofguests']; ?> </p>
+              <p><form action="?deleteRes" method="post">
+                  <input type="hidden" name="reservationID" value="<?php echo $reservation['reservationID']; ?>">
+                  <input type="hidden" name="startdate" value="<?php echo $reservation['startdate']; ?>">
+                  <input type="hidden" name="roomno" value="<?php echo $reservation['roomno']; ?>">
+
+
+                  <input type="submit" value="Cancel Reservation">
+              </form></p>
               <hr/>
           </div>
-
       <?php endforeach; ?>
   </div>
 
@@ -136,7 +149,7 @@
     });
 
   </script>
-
+  
   <div id="footer" style="text-align: center">
     <p>©2016 CIA Inn, Inc. All rights reserved.</p>
 </div>

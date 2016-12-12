@@ -52,8 +52,51 @@ try{
 
 }
 
+// Delete address
+
+if (isset($_GET['deleteAdd']))
+{
+    $addressID=$_POST['addressID'];
+    try {
+        $sqlCheck = "SELECT * FROM creditcard where addressID= '$addressID'";
+        $sCheck = $pdo->query($sqlCheck);
+        $num=$sCheck->rowCount();
+        debug_to_console('rows:' .$num);
+        if ($sCheck->rowCount()==0) {
+
+            try{
+                $sqlDeleteAdd="DELETE FROM address WHERE addressID=:addressID";
+
+                $deleteAdd=$pdo->prepare($sqlDeleteAdd);
+                $deleteAdd->bindValue(':addressID', $_POST['addressID']);
+                $deleteAdd->execute();
+
+                echo "<script>alert('Address deleted!!')</script>";
+            }
+            catch(PDOException $e){
+                $error = 'Error deleting address information: ' . $e->getMessage();
+                include 'error.html.php';
+                exit();
+
+            }
+
+        }
+ else {
+        echo"<script>alert('This Address cannot be deleted as it is used as billing address!!')</script>";
+        }
+    }
+
+    catch (PDOException $e)
+    {
+        $error = 'Error checking address information: ' . $e->getMessage();
+        include 'error.html.php';
+        exit();
+    }
 
 
+}
+
+// Add Address to logged in customer
 if (isset($_POST['addressline1'])){
 
     try{
@@ -91,16 +134,14 @@ catch (PDOException $e)
     exit();
 }
     echo "<script>alert('Address was added Successfully!!')</script>";
-//    header('Location:customerProfile.php');
-   echo "<script>setTimeout(\"location.href = 'customerProfile.php';\",2000);</script>";
+
 }
 
+// Load addresses for logged in customer
 try{
 
 
     $sqlLoadAddress="SELECT * FROM address WHERE customerID='$customerId' ";
-
-
     $loadAddress=$pdo->query($sqlLoadAddress);
 
 } catch (PDOException $e){
@@ -146,8 +187,30 @@ try{
 //
 //}
 
+// cancel reservation
+if (isset($_GET['deleteRes'])){
+    $today=date("Y-m-d");
+    $sd=$_POST['startdate'];
+    $reservationID=$_POST['reservationId'];
+    debug_to_console('todays date' .$today);
+    debug_to_console('res id' .$reservationID);
+   if (strtotime($today) > strtotime($sd)){
+       echo "<script>alert('This reservation cannot be deleted as it has passed the start date!!')</script>";
+   }
 
-		include 'customerDetails.html.php';
+   else{
+
+       $sqlDeleteRes='DELETE FROM reservation where reservationID= :reservationID';
+       $dRes=$pdo->prepare($sqlDeleteRes);
+       $dRes->bindValue(':reservationID', $reservationID);
+       $dRes->execute();
+       echo "<script>alert('The reservation has been deleted. The amount will be reimbursed to your account in 2-3 working days.')</script>";
+
+   }
+
+
+}
+    include 'customerDetails.html.php';
 
 
 		
