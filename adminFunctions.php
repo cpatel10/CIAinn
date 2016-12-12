@@ -1,7 +1,70 @@
 <?php
 
-		include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/db.inc.php';
-        include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/helpers.inc.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/db.inc.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/helpers.inc.php';
+
+session_start();
+
+if (isset($_GET['editReservation'])) {
+    $reservationIdToEdit = $_POST['reservationId'];
+
+    // get customer id
+    try {
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/db.inc.php';
+
+        $sql = "SELECT customerID FROM reservation WHERE reservationID = '$reservationIdToEdit'";
+        $result = $pdo->query($sql);
+        $row = $result->fetch();
+        $customerId = $row['customerID'];
+    } catch (PDOException $e) {
+            $error = 'Error retrieving customer id: ' . $e->getMessage();
+            include 'error.html.php';
+            exit();
+    }
+
+    try  {
+        $sql = 'UPDATE reservation SET 
+            roomno = :roomno,
+            startdate = :startdate,
+            enddate = :enddate,
+            noofguests = :noofguests
+        Where reservationID = :reservationId';
+
+        $s = $pdo->prepare($sql);
+        $s->bindValue(':roomno', $_POST['roomNoReserved']);
+        $s->bindValue(':startdate', $_POST['checkInReserved']);
+        $s->bindValue(':enddate', $_POST['checkOutReserved']);
+        $s->bindValue(':noofguests', $_POST['noOfGuestsReserved']);
+        $s->bindValue(':reservationId', $reservationIdToEdit);
+
+        $s->execute(); 
+
+    } catch (PDOException $e) {
+        $error = 'Error updating reservation: ' . $e->getMessage();
+        include 'error.html.php';
+        exit();
+    }
+
+    try  {
+        $sql = 'INSERT INTO reservationlog SET 
+            reservationId = :reservationId,
+            customerID = :customerID,
+            changesmade = :changesmade';
+
+        $s = $pdo->prepare($sql);
+        $s->bindValue(':reservationId', $reservationIdToEdit);
+        $s->bindValue(':customerID', $customerId);
+        $s->bindValue(':changesmade', $_POST['changesMade']);
+
+        $s->execute(); 
+
+    } catch (PDOException $e) {
+        $error = 'Error creating reservation log: ' . $e->getMessage();
+        include 'error.html.php';
+        exit();
+    }
+
+}
 		
 		
 if (isset($_GET['addRoom']))
@@ -80,6 +143,31 @@ if (isset($_POST['roomno']))
   exit();
 }
 
+if (isset($_GET['checkIn'])) {
+    try  {
+        $sql = 'UPDATE reservation SET checkinstatus = 1 Where reservationID = :reservationId';
+        $s = $pdo->prepare($sql);
+        $s->bindValue(':reservationId', $_POST['reservationIdCheckIn']);
+        $s->execute(); 
+    } catch (PDOException $e) {
+        $error = 'Error adding room: ' . $e->getMessage();
+        include 'error.html.php';
+        exit();
+    }
+}
+
+if (isset($_GET['checkOut'])) {
+    try  {
+        $sql = 'UPDATE reservation SET checkoutstatus = 1 Where reservationID = :reservationId';
+        $s = $pdo->prepare($sql);
+        $s->bindValue(':reservationId', $_POST['reservationIdCheckOut']);
+        $s->execute(); 
+    } catch (PDOException $e) {
+        $error = 'Error adding room: ' . $e->getMessage();
+        include 'error.html.php';
+        exit();
+    }
+}
 
 
 try

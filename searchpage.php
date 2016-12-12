@@ -27,11 +27,13 @@ try
     where roomno NOT IN (
       select roomno 
       from reservation where(
-	       ('.$startdate. ' between startdate and enddate)
+	       ("'.$startdate. '" between startdate and enddate)
+         or "'.$startdate. '"= startdate
           or 
-          ('.$enddate. ' between startdate and enddate)
+          ("'.$enddate. '" between startdate and enddate)
+          or "'.$enddate. '" = enddate
           or 
-          (startdate between '. $startdate. ' and '.$enddate.')
+          (startdate between "'. $startdate. '" and "'.$enddate.'")
       )
     )
     AND bedsize="'.$bedsize.'"

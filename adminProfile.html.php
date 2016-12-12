@@ -59,18 +59,36 @@ echo 'Welcome ' .$_SESSION['email1'];
  <br><br>
  </div>
   
-	<div class="buttons">
-    <a  class="show" target="1">Edit Reservation</a> |
+<div class="buttons">
+    <a class="show" target="1">Edit Reservation</a> |
 	<a class="show" target="2">Add New Room</a> |
-    <a  class="show" target="3">Add Room</a> |
-	<a  class="show" target="4">Remove Room</a> 
-    
+    <a class="show" target="3">Add Room</a> |
+	<a class="show" target="4">Remove Room</a> |
+    <a class="show" target="5">Guest Check In</a> |
+    <a class="show" target="6">Guest Check Out</a>     
 </div>
 
  
 <div id="fn1" class="adminfn">
- <h3>Edit Reservation</h3>
- </div>
+    <h3>Edit Reservation</h3>
+    <form id="editReservation" action="?editReservation" method="post">
+        <label for="reservationId">Reservation ID: </label>
+        <input type="number" name="reservationId" min="1" required/></br>
+        <label for="roomNoReserved">Room No: </label>
+        <input type="number" name="roomNoReserved" min="1" required/></br>
+        <label for="checkInReserved">Check In Date: </label>
+        <input type="date" name="checkInReserved" required/><br>
+        <label for="checkOutReserved">Check Out Date: </label>
+        <input type="date" name="checkOutReserved" required/><br>
+        <label for="noOfGuestsReserved">No Of Guests: </label>
+        <input type="number" name="noOfGuestsReserved" min="1" required/><br>
+
+        <label for="changesMade">Changes Made: </label>
+        <input type="text" name="changesMade" required/><br>
+
+        <input type="submit" value="Edit Reservation">
+    </form>
+</div>
  
  
  <div id="fn2" class="adminfn">
@@ -126,7 +144,7 @@ echo 'Welcome ' .$_SESSION['email1'];
 	<form action="?addRoom" method="post">
 		<label for="roomno">Room No: </label>
 		<input type= "text" name="roomno" id="roomno">
-		<input type=submit value="Add Room">
+		<input type="submit" value="Add Room">
 	</form>
 
 </div>
@@ -148,6 +166,24 @@ echo 'Welcome ' .$_SESSION['email1'];
       </tr>
     <?php endforeach; ?>
     </table>
+</div>
+
+<div id="fn5" class="adminfn">
+<h3>Guest Check In</h3>
+    <form action="?checkIn" method="post">
+        <label for="reservationIdCheckIn">Reservation Id: </label>
+        <input type= "number" name="reservationIdCheckIn" min="1" required/>
+        <input type="submit" value="Check In"/>
+    </form>
+</div>
+
+<div id="fn6" class="adminfn">
+<h3>Guest Check Out</h3>
+    <form action="?checkOut" method="post">
+        <label for="reservationIdCheckOut">Reservation Id: </label>
+        <input type= "number" name="reservationIdCheckOut" min="1" required/>
+        <input type="submit" value="Check Out"/>
+    </form>
 </div>
 
 <script>

@@ -50,7 +50,7 @@
                     <input id="check-in" class="form-control" type="date" name="check-in" />
                 </div>
                 <div class="form-group">
-                    <label for="check-out">Check In</label>
+                    <label for="check-out">Check Out</label>
                     <input id="check-out" class="form-control" type="date" name="check-out" />
                 </div>
                 <div class="form-group">
