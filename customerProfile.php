@@ -153,18 +153,18 @@ try{
 
 
 //if (isset($_POST['cardNumber'])) {
-//    debug_to_console('post credit card is set');
 //
 //    $cardNumber = $_POST['cardNumber'];
 //    $cardHolderName = $_POST['cardHolderName'];
 //    $cvv = $_POST['cvv'];
 //    $expireMM = $_POST['expireMM'];
 //    $expireYY = $_POST['expireYY'];
+//    $addressID = $_POST['addressID']
 //
 //    $sqlCard = 'INSERT INTO creditcard SET
 //    			cardnumber = :cardNumber,
 //				customerID= :customerID,
-//				addressID= LAST_INSERT_ID(),
+//				addressID= :addressID,
 //				cardholdername= :cardHolderName,
 //        		cvv = :cvv,
 //        		expirymm = :expireMM,
@@ -188,14 +188,14 @@ try{
 //}
 
 // cancel reservation
-if (isset($_GET['deleteRes'])){
+if (isset($_POST['cancelreservation'])){
     $today=date("Y-m-d");
     $sd=$_POST['startdate'];
-    $reservationID=$_POST['reservationId'];
+    $reservationID=$_POST['reservationID'];
     debug_to_console('todays date' .$today);
     debug_to_console('res id' .$reservationID);
    if (strtotime($today) > strtotime($sd)){
-       echo "<script>alert('This reservation cannot be deleted as it has passed the start date!!')</script>";
+       echo "<script>alert('This reservation cannot be canceled as it has passed the start date!!')</script>";
    }
 
    else{
@@ -204,7 +204,7 @@ if (isset($_GET['deleteRes'])){
        $dRes=$pdo->prepare($sqlDeleteRes);
        $dRes->bindValue(':reservationID', $reservationID);
        $dRes->execute();
-       echo "<script>alert('The reservation has been deleted. The amount will be reimbursed to your account in 2-3 working days.')</script>";
+       echo "<script>alert('The reservation has been canceled. The amount will be reimbursed to your account in 2-3 working days.')</script>";
 
    }
 

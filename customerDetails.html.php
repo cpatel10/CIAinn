@@ -123,13 +123,10 @@
               <p><strong>Start Date: </strong><?php echo $reservation['startdate']; ?> <br>
               <p><strong>End Date: </strong><?php echo $reservation['enddate']; ?> <br>
               <p><strong>No of Guests: </strong><?php echo $reservation['noofguests']; ?> </p>
-              <p><form action="?deleteRes" method="post">
+              <p><form action="?" method="post">
                   <input type="hidden" name="reservationID" value="<?php echo $reservation['reservationID']; ?>">
                   <input type="hidden" name="startdate" value="<?php echo $reservation['startdate']; ?>">
-                  <input type="hidden" name="roomno" value="<?php echo $reservation['roomno']; ?>">
-
-
-                  <input type="submit" value="Cancel Reservation">
+                  <input type="submit" name="cancelreservation" value="Cancel Reservation">
               </form></p>
               <hr/>
           </div>
