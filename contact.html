@@ -2,122 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../CIAinn/main.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script type="text/javascript" src="../CIAinn/main.js"></script>
-    <title>CIAinn</title>
+    <title>Contact Us</title>
 </head>
+
 <body>
-<header>
+    <div class="container">
+        <div class="page-header row">
+            <a href="index.php">CIAinn</a>
+        </div>
 
-    <h1><a href="index.html">CIAinn</a></h1>	
-	</header>
-	
-	<form name="contactform" method="post" action="send_form_email.php">
- 
-<table width="450px">
- 
+        <div class="row top-space">
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-6">
+                <form class="form-horizontal" name="contactform" method="post" action="send_form_email.php">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="first_name">First Name *</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" name="first_name" maxlength="50" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="email">Email Address *</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="email" name="email" maxlength="80" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="comments">Comments *</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="comments" maxlength="1000" cols="29" rows="6"></textarea>
+                        </div>
+                    </div>
 
-<tr>
-<tr>
-<tr>
-<tr>
- 
- <td valign="top">
- 
-  <label for="first_name">First Name *</label>
- 
- </td>
- 
- <td valign="top">
- 
-  <input  type="text" name="first_name" maxlength="50" size="30">
- 
- </td>
- 
-</tr>
-</tr>
-</tr>
-</tr>
- 
 
- 
-<tr>
-<tr>
-<tr>
-<tr>
- 
- <td valign="top">
- 
-  <label for="email">Email Address *</label>
- 
- </td>
- 
- <td valign="top">
- 
-  <input  type="text" name="email" maxlength="80" size="30">
- 
- </td>
- 
-</tr>
-</tr>
-</tr>
-</tr>
- 
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input class="btn btn-default" type="submit" value="Submit" style="width: 80px">
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-3">
+            </div>
+        </div>
 
- 
-<tr>
-<tr>
-<tr>
-<tr>
- 
- <td valign="top">
- 
-  <label for="comments">Comments *</label>
- 
- </td>
- 
- <td valign="top">
- 
-  <textarea  name="comments" maxlength="1000" cols="29" rows="6"></textarea>
- 
- </td>
- 
-</tr>
-</tr>
-</tr>
-</tr>
- 
-<tr>
-<tr>
-<tr>
-<tr>
-<tr>
-<tr>
-<tr>
-<tr>
- 
- <td colspan="2" style="text-align:left">
- 
-  <input type="submit" value="Submit" style="width: 80px"> 
- 
- </td>
- 
-</tr>
-</tr>
-</tr>
-</tr>
-</tr>
-</tr>
-</tr>
-</tr>
- 
-</table>
- 
-</form>
-
-<div id="footer" style="text-align: center">
-    <p>©2016 CIA Inn, Inc. All rights reserved.</p>
-</div>
-	</body>
-	</html>
+        <div class="row top-space center-align">
+            <footer>
+                <a href="">About US</a><label>|</label>
+                <a href="contact.html">Contact Us</a><label>|</label>
+                <a href="">Subscribe</a><label>|</label>
+                <a href="">Reviews</a><label>|</label>
+                <a href="">Terms & Policies</a><label>|</label>
+                <a href="">Careers</a></br>
+                <copyright>©2016 CIA Inn, Inc. All rights reserved.</copyright>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

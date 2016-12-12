@@ -10,7 +10,7 @@
     <title>CIAinn</title>
 </head>
 
-<body id="index-body">
+<body>
     <?php
     include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/db.inc.php';
 

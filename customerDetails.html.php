@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../CIAinn/main.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<!--    <script type="text/javascript" src="../CIAinn/main.js"></script>-->
     <title>profile</title>
 </head>
   </head>
@@ -14,7 +13,7 @@
 
     <h1><a href="index.php">CIAinn</a></h1>
   </header>
-  
+
   <div id="funtions">
 	<a class="show" target="1">Personal Details</a> |
 	<a class="show" target="2">Address</a> |
@@ -99,7 +98,7 @@
     });
 
   </script>
-  
+
   <div id="footer" style="text-align: center">
     <p>©2016 CIA Inn, Inc. All rights reserved.</p>
 </div>
