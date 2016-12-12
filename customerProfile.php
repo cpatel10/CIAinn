@@ -21,6 +21,39 @@ try {
 
 debug_to_console('customer id: ' . $customerId);
 
+
+try{
+
+
+    $sqlInfo="SELECT * FROM customer WHERE customerID='$customerId' ";
+
+
+    $info=$pdo->query($sqlInfo);
+
+} catch (PDOException $e){
+    $error = 'Error fetching customer details: ' . $e->getMessage();
+    include 'error.html.php';
+    exit();
+
+}
+
+try{
+
+
+    $sqlRes="SELECT * FROM reservation WHERE customerID='$customerId' ";
+
+
+    $res=$pdo->query($sqlRes);
+
+} catch (PDOException $e){
+    $error = 'Error fetching reservation details: ' . $e->getMessage();
+    include 'error.html.php';
+    exit();
+
+}
+
+
+
 if (isset($_POST['addressline1'])){
 
     try{
@@ -64,9 +97,11 @@ catch (PDOException $e)
 
 try{
 
-    $sqlLoadAddress="SELECT addressline1, addressline2, city, state, zipcode FROM address WHERE customerID='$customerId' ";
 
-    $loadAddress=$pdo ->query($sqlLoadAddress);
+    $sqlLoadAddress="SELECT * FROM address WHERE customerID='$customerId' ";
+
+
+    $loadAddress=$pdo->query($sqlLoadAddress);
 
 } catch (PDOException $e){
     $error = 'Error fetching address: ' . $e->getMessage();
@@ -85,6 +120,25 @@ try{
 //    $expireMM = $_POST['expireMM'];
 //    $expireYY = $_POST['expireYY'];
 //
+//    $sqlCard = 'INSERT INTO creditcard SET
+//    			cardnumber = :cardNumber,
+//				customerID= :customerID,
+//				addressID= LAST_INSERT_ID(),
+//				cardholdername= :cardHolderName,
+//        		cvv = :cvv,
+//        		expirymm = :expireMM,
+//        		expiryyy = :expireYY';
+//
+//
+//    $sc = $pdo->prepare($sqlCreditCard);
+//    $sc->bindValue(':cardNumber', $cardNumber);
+//    $sc->bindValue(':customerID', $customerId);
+//    $sc->bindValue(':cardHolderName', $cardHolderName);
+//    $sc->bindValue(':cvv', $cvv);
+//    $sc->bindValue(':expireMM', $expireMM);
+//    $sc->bindValue(':expireYY', $expireYY);
+//
+//    $scc->execute();
 //
 //
 //

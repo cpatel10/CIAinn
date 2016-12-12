@@ -28,14 +28,24 @@
 
 
 
+          <?php foreach ($info as $detail): ?>
+
+              <div class="personal-info">
+                  <p><strong>First Name: </strong><?php echo $detail['fname']; ?> </p>
+                  <p><strong>Last Name: </strong><?php echo $detail['lname']; ?> </p>
+                  <p> <strong>Email: </strong><?php echo $detail['email']; ?> </p>
+                  <p> <strong>Contact number: </strong><?php echo $detail['phone']; ?> </p>
+              </div>
+          <?php endforeach; ?>
+
 
   </div>
   <div id="fun2" class="custfun">
 
   <h3>Address </h3>
 
+        <table>
 
-         <table >
     <?php foreach ($loadAddress as $add): ?>
 
     <tr>
@@ -79,12 +89,39 @@
       <input id="expireMM" type="number" name="expireMM" required max="12" min="1"><br><br>
       <label for="expireYY">Expiry Year : </label>
       <input id="expireYY" type="number" name="expireYY" required min="2016"><br><br>
-      <div><input type="submit" value="Add" style="float: left;"></div>
-    </form>
 
-  </div>
+      <label for="aline1">Address : </label>
+      <select name="aline1" id="aline1">
+
+      <option value="select">Select</option>
+      <?php foreach($loadAddress as $aline1):?>
+        <option value="<?php echo $aline1['addressline1']; ?>" >
+          <?php echo $aline1['addressline1'];?>
+        </option>
+      <?php endforeach; ?>
+      </select>
+        <br><br>
+
+      <div><input type="submit" value="Add"></div>
+    </form>
+</div>
+
   <div id="fun4" class="custfun">
-  <h3>Previous Reservations </h3></div>
+  <h3>Previous Reservations </h3>
+
+      <?php foreach ($res as $reservation): ?>
+
+          <div class="personal-info">
+              <p><strong>Reservation ID: </strong><?php echo $reservation['reservationID']; ?> </p>
+              <p><strong>Room No: </strong><?php echo $reservation['roomno'];?></p>
+              <p><strong>Start Date: </strong><?php echo $reservation['startdate']; ?> </p>
+              <p><strong>End Date: </strong><?php echo $reservation['enddate']; ?> </p>
+              <p><strong>No of Guests: </strong><?php echo $reservation['noofguests']; ?> </p>
+              <hr/>
+          </div>
+
+      <?php endforeach; ?>
+  </div>
 
   <script>
     $('.custfun').hide();
