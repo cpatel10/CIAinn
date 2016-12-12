@@ -44,20 +44,21 @@
 
   <h3>Address </h3>
 
-        <table>
+
 
     <?php foreach ($loadAddress as $add): ?>
 
-    <tr>
-      <td> <?php echo $add['addressline1']; ?> </td>
-       <td><?php echo $add['addressline2']; ?> </td>
-	   <td> <?php echo $add['city']; ?> </td>
-	   <td> <?php echo $add['state']; ?> </td>
-        <td> <?php echo $add['zipcode']; ?> </td>
+    <div id="add-info">
+    <p><strong>Address Line 1 : </strong> <?php echo $add['addressline1']; ?> </p>
+       <p><strong>Address Line 2 : </strong><?php echo $add['addressline2']; ?> </p>
+	   <p><strong>City : </strong> <?php echo $add['city']; ?> </p>
+	   <p><strong>State : </strong> <?php echo $add['state']; ?> </p>
+        <p><strong>Zipcode : </strong> <?php echo $add['zipcode']; ?> </p>
+        <hr/>
 
-       </tr>
+       </div>
     <?php endforeach; ?>
-       </table>
+
 
     <h3> Add Address</h3>
   <form id="addressDetails" action="?" method="post">
