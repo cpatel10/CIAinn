@@ -29,8 +29,8 @@
 			$_SESSION['email1']= $email1;
 	  		header('Location: adminFunctions.php');
 	  	} else {
-	  		$link = 'back to home page';
-		  	echo "Sorry, the password is incorrect <br>";
+			header('Location: adminLogin.php?passwordIncorrect=true');
+			exit();
 	  	}
       ?>
     </p>

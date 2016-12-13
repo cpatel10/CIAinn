@@ -165,8 +165,9 @@
 
 			unset($_SESSION["roomno"]);
 
-			echo '<p>The reservation was made successfully!</p>';
-			echo  '<button class="btn btn-default"><a href="customerProfile.php">Home</a></button>';  		
+			echo '<script>alert("The reservation was made successfully!")</script>';
+            echo "<script>setTimeout(\"location.href = 'customerProfile.php';\",1500);</script>";
+//			echo  '<button class="btn btn-default"><a href="customerProfile.php">Home</a></button>';
 
 
 	  	} catch (PDOException $e) {

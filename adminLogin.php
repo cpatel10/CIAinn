@@ -22,6 +22,9 @@
         elseif(isset($_GET['userNameExists']) && $_GET['userNameExists']) {
             echo "<p>Username already exists! Please use another username or login.</p>";
         }
+        elseif(isset($_GET['passwordIncorrect']) && $_GET['passwordIncorrect']) {
+            echo "<p>Password Incorrect. Please try again.</p>";
+        }
         elseif(isset($_GET['logout'])){
         	session_unregister('email1');
         }
