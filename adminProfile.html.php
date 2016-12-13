@@ -46,11 +46,11 @@
         </div>
 
         <div class="row">
-            <div class="panel-group" id="accordion">
+            <div class="panel-group" id="accordion-admin">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title form-header">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#edit-reservation">Edit Reservation</a>
+                            <a data-toggle="collapse" data-parent="#accordion-admin" href="#edit-reservation">Edit Reservation</a>
                         </h3>
                     </div>
                     <div id="edit-reservation" class="panel-collapse collapse">
@@ -108,7 +108,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title form-header">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#add-new-room">Add New Room</a>
+                            <a data-toggle="collapse" data-parent="#accordion-admin" href="#add-new-room">Add New Room</a>
                         </h3>
                     </div>
                     <div id="add-new-room" class="panel-collapse collapse">
@@ -201,7 +201,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title form-header">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#add-room">Add Room (Availability)</a>
+                            <a data-toggle="collapse" data-parent="#accordion-admin" href="#add-room">Add Room (Availability)</a>
                         </h3>
                     </div>
                     <div id="add-room" class="panel-collapse collapse">
@@ -224,7 +224,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title form-header">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#remove-room">Remove Room</a>
+                            <a data-toggle="collapse" data-parent="#accordion-admin" href="#remove-room">Remove Room</a>
                         </h3>
                     </div>
                     <div id="remove-room" class="panel-collapse collapse">
@@ -252,7 +252,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title form-header">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#guest-check-in">Guest Check In</a>
+                            <a data-toggle="collapse" data-parent="#accordion-admin" href="#guest-check-in">Guest Check In</a>
                         </h3>
                     </div>
                     <div id="guest-check-in" class="panel-collapse collapse">
@@ -275,7 +275,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title form-header">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#guest-check-out">Guest Check Out</a>
+                            <a data-toggle="collapse" data-parent="#accordion-admin" href="#guest-check-out">Guest Check Out</a>
                         </h3>
                     </div>
                     <div id="guest-check-out" class="panel-collapse collapse">
