@@ -180,8 +180,13 @@ catch (PDOException $e)
 
 
 try{
-    $sqlroomcount='SELECT Count(roomno) FROM room where isAvailable=1';
+    $sqlroomcount='SELECT Count(roomno) as Total_rooms FROM room where isAvailable=1';
     $resultRC = $pdo->query($sqlroomcount);
+    $rc=$resultRC->fetch();
+    $totalRoom=$rc['Total_rooms'];
+
+    //debug_to_console('$resultrc: ' .$resultRC);
+
 }
 catch(PDOException $e){
 $error= 'Error fetching available room count: '.$e->getMessage();

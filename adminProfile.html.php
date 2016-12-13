@@ -297,21 +297,20 @@
                 <div id="room-count" class="panel-collapse collapse">
                     <div class="panel-body">
                         <div class="col-sm-offset-3 col-sm-6">
-                            <?php foreach ($resultRC as $rc): ?>
+
                             <table class="table">
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <p><strong>First Name</strong></p>
+                                            <p><strong>Total Number of Rooms available: </strong></p>
                                         </td>
                                         <td>
-                                            <p><?php echo $rc; ?></p>
+                                            <p><?php echo $totalRoom; ?></p>
                                         </td>
                                     </tr>
                                 </tbody>
                            </table>
-                           <?php endforeach; ?>
-                       </div>
+                           </div>
                        <div class="col-sm-3"></div>
                    </div>
                </div>
