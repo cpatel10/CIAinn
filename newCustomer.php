@@ -43,6 +43,8 @@ try {
     exit();
 }
 
+setcookie('username', $email1, time()+ 7200);
+
 session_start();
 
 if (isset($_SESSION['roomno'])) {
