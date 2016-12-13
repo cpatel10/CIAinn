@@ -295,8 +295,35 @@
                         </div>
                     </div>
                 </div>
+<!--            <div class="panel panel-default">-->
+<!--                <div class="panel-heading">-->
+<!--                    <h3 class="panel-title form-header">-->
+<!--                        <a data-toggle="collapse" data-parent="#accordion-admin" href="#room-count">Room Availability</a>-->
+<!--                    </h3>-->
+<!--                </div>-->
+<!--                <div id="guest-check-out" class="panel-collapse collapse">-->
+<!--                    <div class="panel-body">-->
+<!--                        <div class="col-sm-offset-3 col-sm-6">-->
+<!--                            --><?php //foreach ($resultRC as $rc): ?>
+<!--                            <table class="table">-->
+<!--                                <tbody>-->
+<!--                                <tr>-->
+<!--                                    <td>-->
+<!--                                        <p><strong>First Name</strong></p>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <p>--><?php //echo $rc; ?><!--</p>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                </tbody>-->
+<!--                                </table>-->
+<!--                            --><?php //endforeach; ?>
+<!--                    </div>-->
+<!--                        <div class="col-sm-3"></div>-->
+<!--                </div>-->
+            </div>
             </div>
         </div>
-    </div>
+
 </body>
 </html>

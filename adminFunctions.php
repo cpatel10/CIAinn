@@ -181,5 +181,15 @@ catch (PDOException $e)
   include 'error.html.php';
   exit();
 }
+
+try{
+    $sqlroomcount='SELECT Count(roomno) FROM room where isAvailable=1';
+    $resultRC = $pdo->query($sqlroomcount);
+}
+catch(PDOException $e){
+$error= 'Error fetching available room count: '.$e->getMessage();
+    include 'error.html.php';
+    exit();
+}
 include 'adminProfile.html.php';
 ?>
