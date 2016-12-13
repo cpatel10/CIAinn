@@ -17,13 +17,13 @@ if (isset($_GET['editReservation'])) {
         $row = $result->fetch();
         $customerId = $row['customerID'];
     } catch (PDOException $e) {
-            $error = 'Error retrieving customer id: ' . $e->getMessage();
-            include 'error.html.php';
-            exit();
+        $error = 'Error retrieving customer id: ' . $e->getMessage();
+        include 'error.html.php';
+        exit();
     }
 
-    try  {
-        $sql = 'UPDATE reservation SET 
+    try {
+        $sql = 'UPDATE reservation SET
             roomno = :roomno,
             startdate = :startdate,
             enddate = :enddate,
@@ -37,8 +37,8 @@ if (isset($_GET['editReservation'])) {
         $s->bindValue(':noofguests', $_POST['noOfGuestsReserved']);
         $s->bindValue(':reservationId', $reservationIdToEdit);
 
-        $s->execute(); 
-
+        $s->execute();
+        
     } catch (PDOException $e) {
         $error = 'Error updating reservation: ' . $e->getMessage();
         include 'error.html.php';
@@ -46,7 +46,7 @@ if (isset($_GET['editReservation'])) {
     }
 
     try  {
-        $sql = 'INSERT INTO reservationlog SET 
+        $sql = 'INSERT INTO reservationlog SET
             reservationId = :reservationId,
             customerID = :customerID,
             changesmade = :changesmade';
@@ -56,7 +56,7 @@ if (isset($_GET['editReservation'])) {
         $s->bindValue(':customerID', $customerId);
         $s->bindValue(':changesmade', $_POST['changesMade']);
 
-        $s->execute(); 
+        $s->execute();
 
     } catch (PDOException $e) {
         $error = 'Error creating reservation log: ' . $e->getMessage();
@@ -65,8 +65,8 @@ if (isset($_GET['editReservation'])) {
     }
 
 }
-		
-		
+
+
 if (isset($_GET['addRoom']))
 {
   try
@@ -75,18 +75,18 @@ if (isset($_GET['addRoom']))
     $s = $pdo->prepare($sql);
     $s->bindValue(':roomno', $_POST['roomno']);
     $s->execute();
-	
+
   }
-	
+
   catch (PDOException $e)
   {
     $error = 'Error adding room: ' . $e->getMessage();
     include 'error.html.php';
     exit();
-  } 
-  
+  }
+
 }
-		
+
 if (isset($_GET['removeRoom']))
 {
   try
@@ -95,16 +95,16 @@ if (isset($_GET['removeRoom']))
     $s = $pdo->prepare($sql);
     $s->bindValue(':roomno', $_POST['roomno']);
     $s->execute();
-	
+
   }
-	
+
   catch (PDOException $e)
   {
     $error = 'Error removing room: ' . $e->getMessage();
     include 'error.html.php';
     exit();
-  } 
-  
+  }
+
 }
 
 if (isset($_POST['roomno']))
@@ -148,7 +148,7 @@ if (isset($_GET['checkIn'])) {
         $sql = 'UPDATE reservation SET checkinstatus = 1 Where reservationID = :reservationId';
         $s = $pdo->prepare($sql);
         $s->bindValue(':reservationId', $_POST['reservationIdCheckIn']);
-        $s->execute(); 
+        $s->execute();
     } catch (PDOException $e) {
         $error = 'Error adding room: ' . $e->getMessage();
         include 'error.html.php';
@@ -161,7 +161,7 @@ if (isset($_GET['checkOut'])) {
         $sql = 'UPDATE reservation SET checkoutstatus = 1 Where reservationID = :reservationId';
         $s = $pdo->prepare($sql);
         $s->bindValue(':reservationId', $_POST['reservationIdCheckOut']);
-        $s->execute(); 
+        $s->execute();
     } catch (PDOException $e) {
         $error = 'Error adding room: ' . $e->getMessage();
         include 'error.html.php';
