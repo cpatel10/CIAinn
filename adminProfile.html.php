@@ -114,202 +114,199 @@
                                     </div>
                                     <div class="col-sm-3"></div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="adminID">Admin ID</label>
+                                    <div class="col-sm-6">
+                                        <select name="adminID">
+                                            <option value="select">Select</option>
+                                            <?php foreach($result2 as $adminID):?>
+                                            <option value="<?php echo $adminID['adminID']; ?>" >
+                                                <?php echo $adminID['adminID'];?>
+                                            </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="bedsize">Bedsize</label>
+                                    <div class="col-sm-6">
+                                        <select name="bedsize">
+                                            <option value="select">Bedsize</option>
+                                            <?php foreach($result1 as $bedsize):?>
+                                            <option value="<?php echo $bedsize['bedsize']; ?>" >
+                                                <?php echo $bedsize['bedsize'];?>
+                                            </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="smokingallowed">Smoking Allowed</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="text" name="smokingallowed" required />
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="noofbeds">Number of Beds</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="text" name="noofbeds" required />
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="noofguests">Number of Guests</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="text" name="noofguests" required />
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="noofbathroom">Number of bathroom</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="text" name="noofbathroom" required />
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="isAvailable">Available</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="number" name="isAvailable" id="isAvailable" min="0" max="1" required />
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="price">Price</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="number" name="price" id="price" required />
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <input class="btn btn-default" type="submit" value="Add New Room">
+                                </div>
                             </form>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="adminID">Admin ID</label>
-                                <div class="col-sm-6">
-                                    <select name="adminID">
-                                        <option value="select">Select</option>
-                                        <?php foreach($result2 as $adminID):?>
-                                        <option value="<?php echo $adminID['adminID']; ?>" >
-                                            <?php echo $adminID['adminID'];?>
-                                        </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="col-sm-3"></div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="bedsize">Bedsize</label>
-                                <div class="col-sm-6">
-                                    <select name="bedsize">
-                                        <option value="select">Bedsize</option>
-                                        <?php foreach($result1 as $bedsize):?>
-                                        <option value="<?php echo $bedsize['bedsize']; ?>" >
-                                            <?php echo $bedsize['bedsize'];?>
-                                        </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="col-sm-3"></div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="smokingallowed">Smoking Allowed</label>
-                                <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="smokingallowed" required />
-                                </div>
-                                <div class="col-sm-3"></div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="noofbeds">Number of Beds</label>
-                                <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="noofbeds" required />
-                                </div>
-                                <div class="col-sm-3"></div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="noofguests">Number of Guests</label>
-                                <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="noofguests" required />
-                                </div>
-                                <div class="col-sm-3"></div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="noofbathroom">Number of bathroom</label>
-                                <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="noofbathroom" required />
-                                </div>
-                                <div class="col-sm-3"></div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="isAvailable">Available</label>
-                                <div class="col-sm-6">
-                                    <input class="form-control" type="number" name="isAvailable" id="isAvailable" min="0" max="1" required />
-                                </div>
-                                <div class="col-sm-3"></div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="price">Price</label>
-                                <div class="col-sm-6">
-                                    <input class="form-control" type="number" name="price" id="price" required />
-                                </div>
-                                <div class="col-sm-3"></div>
-                            </div>
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <input class="btn btn-default" type="submit" value="Add New Room">
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title form-header">
-                        <a data-toggle="collapse" data-parent="#accordion-admin" href="#add-room">Add Room (Availability)</a>
-                    </h3>
-                </div>
-                <div id="add-room" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <form class="form-horizontal" action="?addRoom" method="post">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="roomno">Room No</label>
-                                <div class="col-sm-6">
-                                    <input class="form-control" type= "text" name="roomno" />
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title form-header">
+                            <a data-toggle="collapse" data-parent="#accordion-admin" href="#add-room">Add Room (Availability)</a>
+                        </h3>
+                    </div>
+                    <div id="add-room" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <form class="form-horizontal" action="?addRoom" method="post">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="roomno">Room No</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type= "text" name="roomno" />
+                                    </div>
+                                    <div class="col-sm-3"></div>
                                 </div>
-                                <div class="col-sm-3"></div>
-                            </div>
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <input class="btn btn-default" type="submit" value="Add Room">
-                            </div>
-                        </form>
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <input class="btn btn-default" type="submit" value="Add Room">
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title form-header">
-                        <a data-toggle="collapse" data-parent="#accordion-admin" href="#remove-room">Remove Room</a>
-                    </h3>
-                </div>
-                <div id="remove-room" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <table class="table">
-                            <?php foreach ($result as $availability): ?>
-                            <tr>
-                                <td>
-                                    <button class="btn btn-default"><?php echo $availability['roomno']; ?> </button>
-                                </td>
-                            	<td>
-                                    <form class="form-horizontal" action="?removeRoom" method="POST">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title form-header">
+                            <a data-toggle="collapse" data-parent="#accordion-admin" href="#remove-room">Remove Room</a>
+                        </h3>
+                    </div>
+                    <div id="remove-room" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <?php foreach ($result as $availability): ?>
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-default"><?php echo $availability['roomno']; ?> </button>
+                                    </td>
+                                	<td>
+                                        <form class="form-horizontal" action="?removeRoom" method="POST">
                                             <input type="hidden" name="roomno" value="<?php echo $availability['roomno']; ?>">
                                             <input class="btn btn-default" type="submit" value="Remove Room">
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </table>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title form-header">
-                        <a data-toggle="collapse" data-parent="#accordion-admin" href="#guest-check-in">Guest Check In</a>
-                    </h3>
-                </div>
-                <div id="guest-check-in" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <form class="form-horizontal" action="?checkIn" method="post">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="reservationIdCheckIn">Reservation Id</label>
-                                <div class="col-sm-6">
-                                    <input class="form-control" type= "number" name="reservationIdCheckIn" min="1" required />
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title form-header">
+                            <a data-toggle="collapse" data-parent="#accordion-admin" href="#guest-check-in">Guest Check In</a>
+                        </h3>
+                    </div>
+                    <div id="guest-check-in" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <form class="form-horizontal" action="?checkIn" method="post">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="reservationIdCheckIn">Reservation Id</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type= "number" name="reservationIdCheckIn" min="1" required />
+                                    </div>
+                                    <div class="col-sm-3"></div>
                                 </div>
-                                <div class="col-sm-3"></div>
-                            </div>
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <input class="btn btn-default" type="submit" value="Check In"/>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title form-header">
-                        <a data-toggle="collapse" data-parent="#accordion-admin" href="#guest-check-out">Guest Check Out</a>
-                    </h3>
-                </div>
-                <div id="guest-check-out" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <form class="form-horizontal" action="?checkOut" method="post">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="reservationIdCheckOut">Reservation Id</label>
-                                <div class="col-sm-6">
-                                    <input class="form-control" type="number" name="reservationIdCheckOut" min="1" required />
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <input class="btn btn-default" type="submit" value="Check In"/>
                                 </div>
-                                <div class="col-sm-3"></div>
-                            </div>
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <input class="btn btn-default" type="submit" value="Check Out" />
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title form-header">
-                        <a data-toggle="collapse" data-parent="#accordion-admin" href="#room-count">Room Availability</a>
-                    </h3>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title form-header">
+                            <a data-toggle="collapse" data-parent="#accordion-admin" href="#guest-check-out">Guest Check Out</a>
+                        </h3>
+                    </div>
+                    <div id="guest-check-out" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <form class="form-horizontal" action="?checkOut" method="post">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="reservationIdCheckOut">Reservation Id</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="number" name="reservationIdCheckOut" min="1" required />
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <input class="btn btn-default" type="submit" value="Check Out" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div id="room-count" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="col-sm-offset-3 col-sm-6">
-
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <p><strong>Total Number of Rooms available: </strong></p>
-                                        </td>
-                                        <td>
-                                            <p><?php echo $totalRoom; ?></p>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                           </table>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title form-header">
+                            <a data-toggle="collapse" data-parent="#accordion-admin" href="#room-count">Room Availability</a>
+                        </h3>
+                    </div>
+                    <div id="room-count" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="col-sm-offset-3 col-sm-6">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <p><strong>Total Number of Rooms available: </strong></p>
+                                            </td>
+                                            <td>
+                                                <p><?php echo $totalRoom; ?></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                               </table>
                            </div>
                        <div class="col-sm-3"></div>
                    </div>
