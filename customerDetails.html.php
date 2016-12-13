@@ -79,10 +79,7 @@
                     <div id="address" class="panel-collapse collapse">
                         <div class="panel-body">
                             <div class="col-sm-offset-3 col-sm-6">
-                                <?php 
-                                include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/helpers.inc.php';
-                                debug_to_console("sql prepared");
-                                foreach ($loadAddress as $add): ?>
+                                <?php foreach ($loadAddress as $add): ?>
                                 <table class="table">
                                     <tbody>
                                         <tr>
@@ -235,7 +232,7 @@
                                             <option value="select">Select</option>
                                             <?php 
                                             foreach($loadAddress as $aline1):?>
-                                                <option value="<?php echo $aline1['addressline1']; ?>" >
+                                                <option value="<?php echo $aline1['addressID']; ?>" >
                                                     <?php echo $aline1['addressline1'];?>
                                                 </option>
                                             <?php endforeach; ?>

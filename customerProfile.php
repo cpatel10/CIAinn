@@ -145,42 +145,45 @@ try{
 
 }
 
+if (isset($_POST['cardNo'])) {
+
+   $cardNumber = $_POST['cardNo'];
+   $cardHolderName = $_POST['cardHolder'];
+   $cvv = $_POST['cvv'];
+   $expireMM = $_POST['expireMM'];
+   $expireYY = $_POST['expireYY'];
+   $addressID = $_POST['aline1'];
+
+   debug_to_console("chosen address id: " . $addressID);
+
+   try {
+       $sqlCard = 'INSERT INTO creditcard SET
+       			cardnumber = :cardNumber,
+    				customerID= :customerID,
+    				addressID= :addressID,
+    				cardholdername= :cardHolderName,
+           		cvv = :cvv,
+           		expirymm = :expireMM,
+           		expiryyy = :expireYY';
 
 
-//if (isset($_POST['cardNumber'])) {
-//
-//    $cardNumber = $_POST['cardNumber'];
-//    $cardHolderName = $_POST['cardHolderName'];
-//    $cvv = $_POST['cvv'];
-//    $expireMM = $_POST['expireMM'];
-//    $expireYY = $_POST['expireYY'];
-//    $addressID = $_POST['addressID']
-//
-//    $sqlCard = 'INSERT INTO creditcard SET
-//    			cardnumber = :cardNumber,
-//				customerID= :customerID,
-//				addressID= :addressID,
-//				cardholdername= :cardHolderName,
-//        		cvv = :cvv,
-//        		expirymm = :expireMM,
-//        		expiryyy = :expireYY';
-//
-//
-//    $sc = $pdo->prepare($sqlCreditCard);
-//    $sc->bindValue(':cardNumber', $cardNumber);
-//    $sc->bindValue(':customerID', $customerId);
-//    $sc->bindValue(':cardHolderName', $cardHolderName);
-//    $sc->bindValue(':cvv', $cvv);
-//    $sc->bindValue(':expireMM', $expireMM);
-//    $sc->bindValue(':expireYY', $expireYY);
-//
-//    $scc->execute();
-//
-//
-//
-//
-//
-//}
+       $sc = $pdo->prepare($sqlCard);
+       $sc->bindValue(':cardNumber', $cardNumber);
+       $sc->bindValue(':customerID', $customerId);
+       $sc->bindValue(':cardHolderName', $cardHolderName);
+       $sc->bindValue(':cvv', $cvv);
+       $sc->bindValue(':expireMM', $expireMM);
+       $sc->bindValue(':expireYY', $expireYY);
+       $sc->bindValue(':addressID', $addressID);
+
+       $sc->execute();
+    } catch(PDOException $e) {
+        $error = 'Error inserting credit card: ' . $e->getMessage();
+        include 'error.html.php';
+        exit();
+    }
+
+}
 
 // cancel reservation
 if (isset($_POST['cancelreservation'])){
@@ -205,8 +208,6 @@ if (isset($_POST['cancelreservation'])){
 
 
 }
-    include 'customerDetails.html.php';
 
-
-		
+    include 'customerDetails.html.php';		
 ?>
