@@ -42,5 +42,7 @@ try {
     	exit();
 }
 
+setcookie('username', $email, time()+ 7200);
+
 header('Location:adminFunctions.php');
 ?>
