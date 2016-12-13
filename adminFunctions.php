@@ -38,7 +38,7 @@ if (isset($_GET['editReservation'])) {
         $s->bindValue(':reservationId', $reservationIdToEdit);
 
         $s->execute();
-        
+
     } catch (PDOException $e) {
         $error = 'Error updating reservation: ' . $e->getMessage();
         include 'error.html.php';
@@ -48,13 +48,11 @@ if (isset($_GET['editReservation'])) {
     try  {
         $sql = 'INSERT INTO reservationlog SET
             reservationId = :reservationId,
-            customerID = :customerID,
-            changesmade = :changesmade';
+            customerID = :customerID';
 
         $s = $pdo->prepare($sql);
         $s->bindValue(':reservationId', $reservationIdToEdit);
         $s->bindValue(':customerID', $customerId);
-        $s->bindValue(':changesmade', $_POST['changesMade']);
 
         $s->execute();
 
@@ -63,7 +61,6 @@ if (isset($_GET['editReservation'])) {
         include 'error.html.php';
         exit();
     }
-
 }
 
 
@@ -75,7 +72,6 @@ if (isset($_GET['addRoom']))
     $s = $pdo->prepare($sql);
     $s->bindValue(':roomno', $_POST['roomno']);
     $s->execute();
-
   }
 
   catch (PDOException $e)
@@ -182,6 +178,7 @@ catch (PDOException $e)
   exit();
 }
 
+
 try{
     $sqlroomcount='SELECT Count(roomno) FROM room where isAvailable=1';
     $resultRC = $pdo->query($sqlroomcount);
@@ -191,5 +188,20 @@ $error= 'Error fetching available room count: '.$e->getMessage();
     include 'error.html.php';
     exit();
 }
+
+try {
+    $sql = 'select sum(rm.price * datediff(enddate, startdate)) as benefit from reservation r join room rm on r.roomno = rm.roomno';
+    $benefitresult = $pdo->query($sql);
+    $benefitrow = $benefitresult->fetch();
+    $benefitcol = $benefitrow['benefit'];
+} catch (Exception $e) {
+    $error = 'Error fetching rooms: ' . $e->getMessage();
+    include 'error.html.php';
+    exit();
+}
+
+
 include 'adminProfile.html.php';
+
+
 ?>

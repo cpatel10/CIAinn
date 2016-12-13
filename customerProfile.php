@@ -197,7 +197,6 @@ if (isset($_POST['cancelreservation'])){
    }
 
    else{
-
        $sqlDeleteRes='DELETE FROM reservation where reservationID= :reservationID';
        $dRes=$pdo->prepare($sqlDeleteRes);
        $dRes->bindValue(':reservationID', $reservationID);
@@ -209,5 +208,6 @@ if (isset($_POST['cancelreservation'])){
 
 }
 
-    include 'customerDetails.html.php';		
+
+    include 'customerDetails.html.php';
 ?>
