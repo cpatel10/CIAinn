@@ -80,8 +80,11 @@
                         <input class="form-control" type="number" name="zipCode" maxlength="5" required />
                     </div>
                 </div>
-                <div class="col-sm-offset-3 col-sm-9">
+                <div class="col-sm-offset-3 col-sm-2">
                     <input class="btn btn-default" type="submit" value="Reserve">
+                </div>
+                <div class="col-sm-7">
+                    <a class="btn btn-default" href="reservation.php?cancelReservationForm">Cancel</a>
                 </div>
             </form>
         </div>

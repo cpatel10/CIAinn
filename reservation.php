@@ -19,7 +19,14 @@
 	if (!isset($_COOKIE['username'])) {
 		include 'login.php';
 		exit();
-	} 
+	}
+
+	// if canceled reservation form
+	if (isset($_GET['cancelReservationForm'])) {
+		unset($_SESSION["roomno"]);
+		header('Location: customerProfile.php');
+    	exit();
+	}
 
 	// if payment details are submitted
 	if (isset($_POST['cardNumber'])) {
@@ -56,48 +63,82 @@
 
 	  	debug_to_console('customer id: ' . $customerId);
 
+	  	//get customers credit cards
+	  	try {
+			$sqlGetCreditCards = "SELECT cardnumber, cardholdername, cvv, expirymm, expiryyy, 
+				addressline1, addressline2, city, state, zipcode
+			 	FROM creditcard LEFT JOIN address ON creditcard.addressID = address.addressID
+			 	WHERE creditcard.customerID = '$customerId'";
+	   		$sCreditGet = $pdo->prepare($sqlGetCreditCards);
+	   		$sCreditGet->execute();
+	    	$creditCards = $sCreditGet->fetchAll();
+	    	debug_to_console("found credit cards: " . count($creditCards));
+		} catch (PDOException $e) {
+	    		$error = 'Error retrieving user information: ' . $e->getMessage();
+	    		include 'error.html.php';
+	    		exit();
+	  	}
+
+	  	debug_to_console("before checking credit card for equality");
+	  	//check if entered credit card has been previously used 
+	  	$creditCardExists = FALSE;
+	  	foreach ($creditCards as $record) {
+	  		debug_to_console($record['cardnumber']);
+	  		if ($cardNumber == $record['cardnumber']/* && $cardHolderName == $record['cardholdername'] &&
+	  			$expireMM == $record['expirymm'] && $expireYY == $record['expiryyy'] && $cvv == $record['cvv'] &&
+	  			$addressLine1 == $record['addressline1'] && 
+	  			$city == $record['city'] && $state == $record['state'] && $zipCode == $record['zipcode']*/) {
+	  			$creditCardExists = TRUE;
+	  		debug_to_console("exact credit card found");
+	  		}
+	  	}
+
+	  	debug_to_console("after checking credit card for equality: " . $creditCardExists);
+
 	  	//insert values
 	  	try {
 	  		$pdo->beginTransaction();
 
-	  		$sqlAddress = 'INSERT INTO address SET
-				customerID= :customerID,
-				addressLine1= :addressLine1,
-				addressLine2= :addressLine2,
-        		city = :city,
-        		state = :state,
-        		zipcode = :zipcode';
+	  		if (!$creditCardExists) {
+		  		$sqlAddress = 'INSERT INTO address SET
+					customerID= :customerID,
+					addressLine1= :addressLine1,
+					addressLine2= :addressLine2,
+	        		city = :city,
+	        		state = :state,
+	        		zipcode = :zipcode';
 
 
-    		$sa = $pdo->prepare($sqlAddress);
-			$sa->bindValue(':customerID', $customerId);
-			$sa->bindValue(':addressLine1', $addressLine1);
-			$sa->bindValue(':addressLine2', $addressLine2);
-    		$sa->bindValue(':city', $city);
-    		$sa->bindValue(':state', $state);
-    		$sa->bindValue(':zipcode', $zipCode);
-    
-    		$sa->execute();
+	    		$sa = $pdo->prepare($sqlAddress);
+				$sa->bindValue(':customerID', $customerId);
+				$sa->bindValue(':addressLine1', $addressLine1);
+				$sa->bindValue(':addressLine2', $addressLine2);
+	    		$sa->bindValue(':city', $city);
+	    		$sa->bindValue(':state', $state);
+	    		$sa->bindValue(':zipcode', $zipCode);
+	    
+	    		$sa->execute();
 
-    		$sqlCreditCard = 'INSERT INTO creditcard SET
-    			cardnumber = :cardNumber,
-				customerID= :customerID,
-				addressID= LAST_INSERT_ID(),
-				cardholdername= :cardHolderName,
-        		cvv = :cvv,
-        		expirymm = :expireMM,
-        		expiryyy = :expireYY';
+	    		$sqlCreditCard = 'INSERT INTO creditcard SET
+	    			cardnumber = :cardNumber,
+					customerID= :customerID,
+					addressID= LAST_INSERT_ID(),
+					cardholdername= :cardHolderName,
+	        		cvv = :cvv,
+	        		expirymm = :expireMM,
+	        		expiryyy = :expireYY';
 
 
-    		$scc = $pdo->prepare($sqlCreditCard);
-			$scc->bindValue(':cardNumber', $cardNumber);
-			$scc->bindValue(':customerID', $customerId);
-			$scc->bindValue(':cardHolderName', $cardHolderName);
-    		$scc->bindValue(':cvv', $cvv);
-    		$scc->bindValue(':expireMM', $expireMM);
-    		$scc->bindValue(':expireYY', $expireYY);
-    
-    		$scc->execute();
+	    		$scc = $pdo->prepare($sqlCreditCard);
+				$scc->bindValue(':cardNumber', $cardNumber);
+				$scc->bindValue(':customerID', $customerId);
+				$scc->bindValue(':cardHolderName', $cardHolderName);
+	    		$scc->bindValue(':cvv', $cvv);
+	    		$scc->bindValue(':expireMM', $expireMM);
+	    		$scc->bindValue(':expireYY', $expireYY);
+	    
+	    		$scc->execute();
+    		}
 
     		$sqlReservation = 'INSERT INTO reservation SET    			
 				customerID= :customerID,
@@ -125,7 +166,7 @@
 			unset($_SESSION["roomno"]);
 
 			echo '<p>The reservation was made successfully!</p>';
-			echo  '<button><a href="index.php">Home</a></button>';  		
+			echo  '<button class="btn btn-default"><a href="customerProfile.php">Home</a></button>';  		
 
 
 	  	} catch (PDOException $e) {

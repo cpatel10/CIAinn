@@ -4,11 +4,12 @@
 	if (isset($_COOKIE['username'])) {
     	unset($_COOKIE['username']);
    		setcookie('username', null, -1);
+      if (isset($_SESSION["roomno"])) {
+        unset($_SESSION["roomno"]);
+      }
    		debug_to_console("loged out!");
    		header('Location: .');
   		exit();
-    	return true;
 	} else {
 		debug_to_console("failed to log out!");
-    	return false;
 	}
