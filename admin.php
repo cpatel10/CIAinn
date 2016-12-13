@@ -25,6 +25,7 @@
 
 	  	if (password_verify($userpwd, $userhash)){
 			$_SESSION['email1']= $email1;
+			setcookie('username', $email1, time()+ 7200);
 	  		header('Location: adminFunctions.php');
 	  	} else {
 			header('Location: adminLogin.php?passwordIncorrect=true');
