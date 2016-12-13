@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Admin Profile</title>
+    <title>Customer Profile</title>
 </head>
 
 <body>
@@ -79,7 +79,10 @@
                     <div id="address" class="panel-collapse collapse">
                         <div class="panel-body">
                             <div class="col-sm-offset-3 col-sm-6">
-                                <?php foreach ($loadAddress as $add): ?>
+                                <?php 
+                                include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/helpers.inc.php';
+                                debug_to_console("sql prepared");
+                                foreach ($loadAddress as $add): ?>
                                 <table class="table">
                                     <tbody>
                                         <tr>
@@ -230,7 +233,8 @@
                                     <div class="col-sm-9">
                                         <select class="form-control" name="aline1">
                                             <option value="select">Select</option>
-                                            <?php foreach($loadAddress as $aline1):?>
+                                            <?php 
+                                            foreach($loadAddress as $aline1):?>
                                                 <option value="<?php echo $aline1['addressline1']; ?>" >
                                                     <?php echo $aline1['addressline1'];?>
                                                 </option>
@@ -262,7 +266,7 @@
                                                 <p><strong>Reservation ID</strong></p>
                                             </td>
                                             <td>
-                                                <p><?php echo $detail['reservationID']; ?></p>
+                                                <p><?php echo $reservation['reservationID']; ?></p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -270,7 +274,7 @@
                                                 <p><strong>Room No</strong></p>
                                             </td>
                                             <td>
-                                                <p><?php echo $detail['roomno']; ?></p>
+                                                <p><?php echo $reservation['roomno']; ?></p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -278,7 +282,7 @@
                                                 <p><strong>Start Date</strong></p>
                                             </td>
                                             <td>
-                                                <p><?php echo $detail['startdate']; ?></p>
+                                                <p><?php echo $reservation['startdate']; ?></p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -286,7 +290,7 @@
                                                 <p><strong>End Date</strong></p>
                                             </td>
                                             <td>
-                                                <p><?php echo $detail['enddate']; ?></p>
+                                                <p><?php echo $reservation['enddate']; ?></p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -294,7 +298,7 @@
                                                 <p><strong>No of Guests</strong></p>
                                             </td>
                                             <td>
-                                                <p><?php echo $detail['noofguests']; ?></p>
+                                                <p><?php echo $reservation['noofguests']; ?></p>
                                             </td>
                                         </tr>
                                         <tr>

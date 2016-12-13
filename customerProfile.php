@@ -7,8 +7,6 @@ $email = $_COOKIE['username'];
 debug_to_console('user email: ' . $email);
 
 try {
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/db.inc.php';
-
     $sql = "SELECT customerID FROM customer WHERE email = '$email'";
     $result = $pdo->query($sql);
     $row = $result->fetch();
@@ -23,11 +21,7 @@ debug_to_console('customer id: ' . $customerId);
 
 
 try{
-
-
     $sqlInfo="SELECT * FROM customer WHERE customerID='$customerId' ";
-
-
     $info=$pdo->query($sqlInfo);
 
 } catch (PDOException $e){
@@ -38,11 +32,7 @@ try{
 }
 
 try{
-
-
     $sqlRes="SELECT * FROM reservation WHERE customerID='$customerId' ";
-
-
     $res=$pdo->query($sqlRes);
 
 } catch (PDOException $e){
@@ -139,10 +129,14 @@ catch (PDOException $e)
 
 // Load addresses for logged in customer
 try{
-
-
     $sqlLoadAddress="SELECT * FROM address WHERE customerID='$customerId' ";
-    $loadAddress=$pdo->query($sqlLoadAddress);
+    //$loadAddress=$pdo->query($sqlLoadAddress);
+    $s = $pdo->prepare($sqlLoadAddress);
+    $s->execute();
+    $loadAddress=$s->fetchAll();
+
+    //debug_to_console("num of addresses: " . $loadAddress->rowCount());
+    debug_to_console("num of addresses: " . count($loadAddress));
 
 } catch (PDOException $e){
     $error = 'Error fetching address: ' . $e->getMessage();
@@ -150,6 +144,7 @@ try{
     exit();
 
 }
+
 
 
 //if (isset($_POST['cardNumber'])) {
