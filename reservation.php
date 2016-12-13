@@ -1,4 +1,4 @@
-<?php 
+<?php
 	include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/helpers.inc.php';
 
 	// Start the session
@@ -6,8 +6,6 @@
 
 	//first time reservation.php is called
 	if (!isset($_SESSION["roomno"])) {
-		debug_to_console("setting session");
-		debug_to_console($_POST['roomno']);
 		$_SESSION["roomno"] = $_POST['roomno'];
 		$_SESSION["startdate"] = $_POST['startdate'];
 		$_SESSION["enddate"] = $_POST['enddate'];
@@ -65,7 +63,7 @@
 
 	  	//get customers credit cards
 	  	try {
-			$sqlGetCreditCards = "SELECT cardnumber, cardholdername, cvv, expirymm, expiryyy, 
+			$sqlGetCreditCards = "SELECT cardnumber, cardholdername, cvv, expirymm, expiryyy,
 				addressline1, addressline2, city, state, zipcode
 			 	FROM creditcard LEFT JOIN address ON creditcard.addressID = address.addressID
 			 	WHERE creditcard.customerID = '$customerId'";
@@ -80,14 +78,11 @@
 	  	}
 
 	  	debug_to_console("before checking credit card for equality");
-	  	//check if entered credit card has been previously used 
+	  	//check if entered credit card has been previously used
 	  	$creditCardExists = FALSE;
 	  	foreach ($creditCards as $record) {
 	  		debug_to_console($record['cardnumber']);
-	  		if ($cardNumber == $record['cardnumber']/* && $cardHolderName == $record['cardholdername'] &&
-	  			$expireMM == $record['expirymm'] && $expireYY == $record['expiryyy'] && $cvv == $record['cvv'] &&
-	  			$addressLine1 == $record['addressline1'] && 
-	  			$city == $record['city'] && $state == $record['state'] && $zipCode == $record['zipcode']*/) {
+	  		if ($cardNumber == $record['cardnumber']) {
 	  			$creditCardExists = TRUE;
 	  		debug_to_console("exact credit card found");
 	  		}
@@ -116,7 +111,7 @@
 	    		$sa->bindValue(':city', $city);
 	    		$sa->bindValue(':state', $state);
 	    		$sa->bindValue(':zipcode', $zipCode);
-	    
+
 	    		$sa->execute();
 
 	    		$sqlCreditCard = 'INSERT INTO creditcard SET
@@ -136,11 +131,11 @@
 	    		$scc->bindValue(':cvv', $cvv);
 	    		$scc->bindValue(':expireMM', $expireMM);
 	    		$scc->bindValue(':expireYY', $expireYY);
-	    
+
 	    		$scc->execute();
     		}
 
-    		$sqlReservation = 'INSERT INTO reservation SET    			
+    		$sqlReservation = 'INSERT INTO reservation SET
 				customerID= :customerID,
 				roomno = :roomNo,
 				cardnumber = :cardNumber,
@@ -158,7 +153,7 @@
 			$sr->bindValue(':startdate', $_SESSION["startdate"]);
     		$sr->bindValue(':enddate',$_SESSION["enddate"]);
     		$sr->bindValue(':noOfGuests', $_SESSION["guests"]);
-    
+
     		$sr->execute();
 
     		$pdo->commit();
@@ -167,18 +162,13 @@
 
 			echo '<script>alert("The reservation was made successfully!")</script>';
             echo "<script>setTimeout(\"location.href = 'customerProfile.php';\",1500);</script>";
-//			echo  '<button class="btn btn-default"><a href="customerProfile.php">Home</a></button>';
-
-
 	  	} catch (PDOException $e) {
 	  			$pdo->rollBack();
-	    		$error = 'Error inserting values into database: ' . $e->getMessage();	    		
+	    		$error = 'Error inserting values into database: ' . $e->getMessage();
 	    		include 'error.html.php';
 	    		exit();
 	  	}
-
 	} else { // if payment details haven't been submitted
 		include 'reservationForm.php';
 	}
-
  ?>

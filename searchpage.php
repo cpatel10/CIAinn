@@ -40,29 +40,8 @@
     	AND isAvailable=1
     	ORDER BY
         RAND()';
-        //LIMIT 0, 1';
         $result = $pdo->query($sql);
 
-     //  $sql='SELECT roomno, bedsize, smokingallowed, noofbeds, noofguests,noofbathroom
-     //    from room
-     //    where roomno NOT IN (
-     //      select roomno
-     //      from reservation where(
-     //         (:startdate between startdate and enddate)
-     //          or
-     //          (:enddate between startdate and enddate)
-     //          or
-     //          (startdate between :startdate and :enddate)
-     //      )
-     //    )
-     //    AND bedsize=:bedsize';
-
-    	// $s = $pdo->prepare($sql);
-     //  $s->bindValue(':startdate', $startdate);
-     //  $s->bindValue(':enddate', $enddate);
-     //  $s->bindValue(':bedsize', $bedsize);
-     //  $s->execute();
-     //  $result = $s->fetchAll();
         $numOfRecords = $result->rowCount();
         debug_to_console($numOfRecords);
     } catch(PDOException $e) {
@@ -134,20 +113,6 @@
                 </table>
             </div>
         </div>
-    <!--   <tr>
-    <td> <?php echo $search['roomno']; ?> </td>
-    <td style= "width:150px"> <?php echo $search['bedsize']; ?> </td>
-    <td> <?php echo $search['noofbeds']; ?> </td>
-    <td> <?php echo $search['noofguests']; ?> </td>
-    <td> <?php echo $search['smokingallowed']; ?> </td>
-     <td> <?php echo $search['noofbathroom']; ?> </td>
-     <td>
-     <form action="" method="post">
-      <input type="hidden" name="id" value="<?php echo $search['roomno']; ?>">
-     <input type="submit" value="reserve">
-    </form>
-    </td>
-    </tr> -->
         <?php endforeach; ?>
     </div>
 </body>

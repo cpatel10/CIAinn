@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <div class="page-header row">
-            <a class="logo" href="index.php">CIAinn</a>
+            <a href="index.php">CIAinn</a>
         </div>
 
         <?php

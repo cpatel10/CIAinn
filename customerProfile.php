@@ -1,10 +1,8 @@
 <?php
-
-		include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/db.inc.php';
-        include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/helpers.inc.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/db.inc.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/helpers.inc.php';
 
 $email = $_COOKIE['username'];
-debug_to_console('user email: ' . $email);
 
 try {
     $sql = "SELECT customerID FROM customer WHERE email = '$email'";
@@ -16,8 +14,6 @@ try {
     include 'error.html.php';
     exit();
 }
-
-debug_to_console('customer id: ' . $customerId);
 
 
 try{
@@ -34,7 +30,6 @@ try{
 try{
     $sqlRes="SELECT * FROM reservation WHERE customerID='$customerId' ";
     $res=$pdo->query($sqlRes);
-
 } catch (PDOException $e){
     $error = 'Error fetching reservation details: ' . $e->getMessage();
     include 'error.html.php';
@@ -43,7 +38,6 @@ try{
 }
 
 // Delete address
-
 if (isset($_GET['deleteAdd']))
 {
     $addressID=$_POST['addressID'];
@@ -51,12 +45,10 @@ if (isset($_GET['deleteAdd']))
         $sqlCheck = "SELECT * FROM creditcard where addressID= '$addressID'";
         $sCheck = $pdo->query($sqlCheck);
         $num=$sCheck->rowCount();
-        debug_to_console('rows:' .$num);
+        
         if ($sCheck->rowCount()==0) {
-
             try{
                 $sqlDeleteAdd="DELETE FROM address WHERE addressID=:addressID";
-
                 $deleteAdd=$pdo->prepare($sqlDeleteAdd);
                 $deleteAdd->bindValue(':addressID', $_POST['addressID']);
                 $deleteAdd->execute();
@@ -67,37 +59,27 @@ if (isset($_GET['deleteAdd']))
                 $error = 'Error deleting address information: ' . $e->getMessage();
                 include 'error.html.php';
                 exit();
-
             }
-
+        } else {
+        	echo"<script>alert('This Address cannot be deleted as it is used as billing address!!')</script>";
         }
- else {
-        echo"<script>alert('This Address cannot be deleted as it is used as billing address!!')</script>";
-        }
-    }
-
-    catch (PDOException $e)
-    {
+    } catch (PDOException $e) {
         $error = 'Error checking address information: ' . $e->getMessage();
         include 'error.html.php';
         exit();
     }
-
-
 }
 
 // Add Address to logged in customer
 if (isset($_POST['addressline1'])){
-
     try{
+	    $addressline1 = $_POST['addressline1'];
+	    $addressline2 = $_POST['addressline2'];
+	    $city = $_POST['city'];
+	    $state = $_POST['state'];
+	    $zipcode = $_POST['zipcode'];
 
-    $addressline1 = $_POST['addressline1'];
-    $addressline2 = $_POST['addressline2'];
-    $city = $_POST['city'];
-    $state = $_POST['state'];
-    $zipcode = $_POST['zipcode'];
-
-    $sqlAdd = 'INSERT INTO address SET
+    	$sqlAdd = 'INSERT INTO address SET
 				customerID= :customerID,
 				addressline1= :addressline1,
 				addressline2= :addressline2,
@@ -105,56 +87,41 @@ if (isset($_POST['addressline1'])){
         		state = :state,
         		zipcode = :zipcode';
 
-
-
-    $sadd = $pdo->prepare($sqlAdd);
-    $sadd->bindValue(':customerID', $customerId);
-    $sadd->bindValue(':addressline1', $addressline1);
-    $sadd->bindValue(':addressline2', $addressline2);
-    $sadd->bindValue(':city', $city);
-    $sadd->bindValue(':state', $state);
-    $sadd->bindValue(':zipcode', $zipcode);
-
-    $sadd->execute();
-}
-catch (PDOException $e)
-{
-    $error = 'Error adding address: ' . $e->getMessage();
-    include 'error.html.php';
-    exit();
-}
+	    $sadd = $pdo->prepare($sqlAdd);
+	    $sadd->bindValue(':customerID', $customerId);
+	    $sadd->bindValue(':addressline1', $addressline1);
+	    $sadd->bindValue(':addressline2', $addressline2);
+	    $sadd->bindValue(':city', $city);
+	    $sadd->bindValue(':state', $state);
+	    $sadd->bindValue(':zipcode', $zipcode);
+    	$sadd->execute();
+	} catch (PDOException $e) {
+	    $error = 'Error adding address: ' . $e->getMessage();
+	    include 'error.html.php';
+	    exit();
+	}
     echo "<script>alert('Address was added Successfully!!')</script>";
-
 }
 
 // Load addresses for logged in customer
 try{
     $sqlLoadAddress="SELECT * FROM address WHERE customerID='$customerId' ";
-    //$loadAddress=$pdo->query($sqlLoadAddress);
     $s = $pdo->prepare($sqlLoadAddress);
     $s->execute();
     $loadAddress=$s->fetchAll();
-
-    //debug_to_console("num of addresses: " . $loadAddress->rowCount());
-    debug_to_console("num of addresses: " . count($loadAddress));
-
-} catch (PDOException $e){
+} catch (PDOException $e) {
     $error = 'Error fetching address: ' . $e->getMessage();
     include 'error.html.php';
     exit();
-
 }
 
 if (isset($_POST['cardNo'])) {
-
    $cardNumber = $_POST['cardNo'];
    $cardHolderName = $_POST['cardHolder'];
    $cvv = $_POST['cvv'];
    $expireMM = $_POST['expireMM'];
    $expireYY = $_POST['expireYY'];
    $addressID = $_POST['aline1'];
-
-   debug_to_console("chosen address id: " . $addressID);
 
    try {
        $sqlCard = 'INSERT INTO creditcard SET
@@ -166,7 +133,6 @@ if (isset($_POST['cardNo'])) {
            		expirymm = :expireMM,
            		expiryyy = :expireYY';
 
-
        $sc = $pdo->prepare($sqlCard);
        $sc->bindValue(':cardNumber', $cardNumber);
        $sc->bindValue(':customerID', $customerId);
@@ -175,14 +141,12 @@ if (isset($_POST['cardNo'])) {
        $sc->bindValue(':expireMM', $expireMM);
        $sc->bindValue(':expireYY', $expireYY);
        $sc->bindValue(':addressID', $addressID);
-
        $sc->execute();
     } catch(PDOException $e) {
         $error = 'Error inserting credit card: ' . $e->getMessage();
         include 'error.html.php';
         exit();
     }
-
 }
 
 // cancel reservation
@@ -190,8 +154,6 @@ if (isset($_POST['cancelreservation'])){
     $today=date("Y-m-d");
     $sd=$_POST['startdate'];
     $reservationID=$_POST['reservationID'];
-    debug_to_console('todays date' .$today);
-    debug_to_console('res id' .$reservationID);
    if (strtotime($today) > strtotime($sd)){
        echo "<script>alert('This reservation cannot be canceled as it has passed the start date!!')</script>";
    }
@@ -202,12 +164,8 @@ if (isset($_POST['cancelreservation'])){
        $dRes->bindValue(':reservationID', $reservationID);
        $dRes->execute();
        echo "<script>alert('The reservation has been canceled. The amount will be reimbursed to your account in 2-3 working days.')</script>";
-
    }
-
-
 }
 
-
-    include 'customerDetails.html.php';
+include 'customerDetails.html.php';
 ?>

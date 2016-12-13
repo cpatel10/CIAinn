@@ -14,14 +14,10 @@
     <?php
     include_once $_SERVER['DOCUMENT_ROOT'] . '/CIAinn/includes/db.inc.php';
 
-    try
-    {
+    try {
         $sql='SELECT DISTINCT bedsize FROM room';
         $result = $pdo->query($sql);
-    }
-
-    catch(PDOException $e)
-    {
+    } catch(PDOException $e) {
         $error = 'Error fetching bedsize.' . $e->getMessage();
         include 'error.html.php';
         exit();
