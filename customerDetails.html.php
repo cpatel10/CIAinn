@@ -14,6 +14,10 @@
     <div class="container">
         <div class="page-header row">
             <a href="index.php">CIAinn</a>
+            <div class="btn-wrapper-right">
+            <p> Welcome <?php echo $_COOKIE['username']; ?></p>
+            <a class="btn btn-default" href="logout.php">Sign Out</a>
+            </div>
         </div>
 
         <div class="row">

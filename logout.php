@@ -7,7 +7,7 @@
       if (isset($_SESSION["roomno"])) {
         unset($_SESSION["roomno"]);
       }
-   		header('Location: .');
+   		header('Location: index.php');
   		exit();
 	} else { }
 ?>

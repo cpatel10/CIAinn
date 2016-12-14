@@ -204,7 +204,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label" for="roomno">Room No</label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type= "text" name="roomno" />
+                                    <input class="form-control" type= "text" name="rno" />
                                 </div>
                                 <div class="col-sm-3"></div>
                             </div>
@@ -231,7 +231,7 @@
                                 </td>
                             	<td>
                                     <form class="form-horizontal" action="?removeRoom" method="POST">
-                                            <input type="hidden" name="roomno" value="<?php echo $availability['roomno']; ?>">
+                                            <input type="hidden" name="rero" value="<?php echo $availability['roomno']; ?>">
                                             <input class="btn btn-default" type="submit" value="Remove Room">
                                         </div>
                                     </form>

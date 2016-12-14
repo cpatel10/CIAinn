@@ -66,10 +66,13 @@ if (isset($_GET['editReservation'])) {
 
 if (isset($_GET['addRoom'])) {
     try {
-        $sql = 'UPDATE Room SET isAvailable = 1 Where RoomNo = :roomno';
-        $s = $pdo->prepare($sql);
-        $s->bindValue(':roomno', $_POST['roomno']);
-        $s->execute();
+        $sqladdRoom = 'UPDATE Room SET isAvailable = 1 Where RoomNo = :rno';
+        $saddRoom = $pdo->prepare($sqladdRoom);
+        $saddRoom->bindValue(':rno', $_POST['rno']);
+        $saddRoom->execute();
+
+        echo '<script>alert("Room availability added!!")</script>';
+
     } catch (PDOException $e) {
         $error = 'Error adding room: ' . $e->getMessage();
         include 'error.html.php';
@@ -79,10 +82,12 @@ if (isset($_GET['addRoom'])) {
 
 if (isset($_GET['removeRoom'])) {
     try {
-        $sql = 'UPDATE Room SET isAvailable = 0 Where RoomNo = :roomno';
+        $sql = 'UPDATE Room SET isAvailable = 0 Where RoomNo = :rero';
         $s = $pdo->prepare($sql);
-        $s->bindValue(':roomno', $_POST['roomno']);
+        $s->bindValue(':rero', $_POST['rero']);
         $s->execute();
+
+        echo '<script>alert("Room availability disabled!!")</script>';
     } catch (PDOException $e) {
         $error = 'Error removing room: ' . $e->getMessage();
         include 'error.html.php';

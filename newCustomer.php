@@ -43,7 +43,7 @@ try {
     exit();
 }
 
-setcookie('username', $email1, time()+ 7200);
+setcookie('username', $email, time()+ 7200);
 
 session_start();
 
